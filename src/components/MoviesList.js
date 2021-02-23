@@ -1,25 +1,23 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import MovieListItem from './MovieListItem'
-import data from '../helpers/filmDatas'
 
-const MovieList = () => {
+const MovieList = ({ items }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={items}
         renderItem={MovieListItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
       />
     </View>
   )
 }
 
-
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     marginTop: 30,
-  }
+  },
 })
 
 export default MovieList

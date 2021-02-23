@@ -1,12 +1,12 @@
-import React from 'react';
-import Search from "./src/components/Search";
-import MoviesList from "./src/components/MoviesList"
+import React from 'react'
+import { StatusBar } from 'react-native'
+import Home from './src/pages/Home'
 
-export default function App() {
-  return (
-    <>
-      <Search />
-      <MoviesList />
-    </>
-  );
-}
+const App = () => (
+  <>
+    <StatusBar />
+    <Home />
+  </>
+)
+
+export default App

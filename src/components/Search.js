@@ -1,20 +1,28 @@
-import React from 'react';
-import { TextInput, View, StyleSheet, Button } from "react-native";
+import React from 'react'
+import { TextInput, View, StyleSheet, Button } from 'react-native'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
-export default class Search extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput style={styles.input} placeholder='Titre du film'/>
-        <Button title='Rechercher' onPress={() => {}}/>
-      </View>
-    )
+const Search = ({ setter }) => {
+  const filterMovies = (text) => {
+    text.length >= 3 ? setter(text) : setter('')
   }
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        onChangeText={filterMovies}
+        style={styles.input}
+        placeholder="Titre du film"
+      />
+      <Button title="Rechercher" onPress={() => {}} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    marginTop: getStatusBarHeight(),
     backgroundColor: '#f44802',
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
@@ -28,5 +36,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
     backgroundColor: '#FFF',
-  }
+  },
 })
+
+export default Search
