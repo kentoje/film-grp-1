@@ -4,7 +4,7 @@ const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original'
 const BASE_MOVIE_URL = 'https://api.themoviedb.org/3/search/movie'
 const API_KEY = '026890b0945cbc402813edbeb90f0223'
 
-const getMovies = async (page) => {
+const getMoviesByPage = async (page) => {
   try {
     const {
       data: { results, total_pages: totalPages },
@@ -26,4 +26,4 @@ const getMovies = async (page) => {
   }
 }
 
-export { getMovies }
+export { getMoviesByPage }

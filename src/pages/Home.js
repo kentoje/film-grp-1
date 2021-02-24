@@ -3,7 +3,7 @@ import Search from '../components/Search'
 import MoviesList from '../components/MoviesList'
 import Loader from '../components/Loader'
 import { includes } from '../lib/filter'
-import { getMovies } from '../service/fetchMovies'
+import { getMoviesByPage } from '../service/fetchMovies'
 
 const Home = () => {
   // No store, apiMovies is behaving like how a store would do.
@@ -22,7 +22,9 @@ const Home = () => {
       try {
         setIsLoading(true)
 
-        const { results, nextPage: futurPage, totalPages } = await getMovies(nextPage)
+        const { results, nextPage: futurPage, totalPages } = await getMoviesByPage(
+          nextPage,
+        )
 
         setApiMovies(results)
         setMovies(results)
@@ -42,7 +44,9 @@ const Home = () => {
         try {
           setIsLoading(true)
 
-          const { results, nextPage: futurPage, totalPages } = await getMovies(nextPage)
+          const { results, nextPage: futurPage, totalPages } = await getMoviesByPage(
+            nextPage,
+          )
           const allMovies = [...movies, ...results]
 
           setApiMovies(allMovies)
