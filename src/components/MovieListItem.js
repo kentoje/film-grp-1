@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   View,
   Image,
@@ -16,6 +16,7 @@ const responsiveDimension = quarterOfValue(Dimensions.get('window').width)
 
 const MovieListItem = ({ item }) => (
   <TouchableHighlight
+    underlayColor="#f4480222"
     onPress={() => {
       alert('a')
     }}
@@ -68,4 +69,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default MovieListItem
+export default memo(MovieListItem)
