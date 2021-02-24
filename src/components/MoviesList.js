@@ -1,19 +1,15 @@
 import React from 'react'
-import { FlatList, View, Text } from 'react-native'
+import { FlatList, View } from 'react-native'
 import MovieListItem from './MovieListItem'
 
-const MovieList = ({ items, isLoaded }) => {
+const MovieList = ({ items }) => {
   return (
     <View>
-      {!isLoaded ? (
-        <FlatList
-          data={items}
-          renderItem={MovieListItem}
-          keyExtractor={(item) => String(item.id)}
-        />
-      ) : (
-        <Text>Chargement</Text>
-      )}
+      <FlatList
+        data={items}
+        renderItem={MovieListItem}
+        keyExtractor={(item) => String(item.id)}
+      />
     </View>
   )
 }

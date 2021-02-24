@@ -3,6 +3,7 @@ import Search from '../components/Search'
 import MoviesList from '../components/MoviesList'
 import { includes } from '../lib/filter'
 import { getMovies } from '../service/fetchMovies'
+import { ActivityIndicator } from 'react-native'
 
 const Home = () => {
   // No store, store like behavior
@@ -11,7 +12,7 @@ const Home = () => {
   const [filter, setFilter] = useState('')
   const [nextPage, setNextPage] = useState(1)
   const [maxPage, setMaxPage] = useState(0)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [hasReachedBottom, setHasReachedBottom] = useState(false)
   const includesTitle = includes('title')(filter)
 
@@ -19,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     ;(async () => {
       try {
-        setIsLoaded(true)
+        setIsLoading(true)
 
         const { results, nextPage: futurPage, totalPages } = await getMovies(nextPage)
 
@@ -27,7 +28,7 @@ const Home = () => {
         setMovies(results)
         setNextPage(futurPage)
         setMaxPage(totalPages)
-        setIsLoaded(false)
+        setIsLoading(false)
       } catch (err) {
         console.error(err)
       }
@@ -42,7 +43,8 @@ const Home = () => {
   return (
     <>
       <Search setter={setFilter} />
-      <MoviesList items={movies} isLoaded={isLoaded} />
+      {isLoading && <ActivityIndicator size="large" color="#f44802" />}
+      <MoviesList items={movies} />
     </>
   )
 }
