@@ -1,10 +1,10 @@
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import MovieListItem from './MovieListItem'
 
 const MovieList = ({ items }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={items}
         renderItem={MovieListItem}
@@ -13,11 +13,5 @@ const MovieList = ({ items }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 30,
-  },
-})
 
 export default MovieList
