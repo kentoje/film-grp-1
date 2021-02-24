@@ -26,7 +26,7 @@ const MovieListItem = ({ item }) => (
           resizeMode={'contain'}
           source={{
             uri:
-              'https://lh3.googleusercontent.com/proxy/uH8BK_32tod6bziRN2ysytYq-lcOm1Ze8zvmzb9zBbD1Vrr5O-4joQtaxAuN7F0wCbmNKa99G13_GBlTr3_aV01V1vqYYsqkBBzIDXH_BrpeBoteBP8z1pENC5mQ6xkkSLE4EOm-7kaW',
+              'https://lumiere-a.akamaihd.net/v1/images/image_a89e70e8.jpeg?region=0%2C0%2C540%2C810',
           }}
         />
       </View>
