@@ -1,5 +1,6 @@
 import React from 'react'
 import { TextInput, View, StyleSheet, Button } from 'react-native'
+import { Icon } from 'react-native-elements'
 
 const Search = ({ setter }) => {
   const filterMovies = (text) => {
@@ -8,6 +9,7 @@ const Search = ({ setter }) => {
 
   return (
     <View style={styles.container}>
+      {/* <Icon name="search" style={styles.icon} /> */}
       <TextInput
         onChangeText={filterMovies}
         style={styles.input}
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
+  icon: {},
   input: {
     marginLeft: 5,
     marginRight: 5,
