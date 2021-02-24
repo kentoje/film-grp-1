@@ -16,6 +16,7 @@ const getMovies = async (page) => {
         image: movie.poster_path
           ? `${BASE_IMAGE_URL}${movie.poster_path}`
           : 'https://media.comicbook.com/files/img/default-movie.png',
+        isPopular: movie.popularity * 10 > 7,
       })),
       nextPage: page < totalPages ? page + 1 : page,
       totalPages,

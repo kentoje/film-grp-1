@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   Dimensions,
 } from 'react-native'
+import { Icon } from 'react-native-elements'
 
 const RATIO = 0.25
 const multiply = (RATIO) => (mesurement) => RATIO * mesurement
@@ -30,7 +31,10 @@ const MovieListItem = ({ item }) => (
         />
       </View>
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
+        <View style={styles.description}>
+          <Text style={styles.title}>{item.title}</Text>
+          {item.isPopular && <Icon name="star" color="#f44802" size={14} />}
+        </View>
         <Text>{item.release_date}</Text>
       </View>
     </View>
@@ -46,6 +50,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderBottomColor: 'grey',
     borderBottomWidth: 1,
+  },
+  description: {
+    flexDirection: 'row',
   },
   imageWrapper: {
     width: responsiveDimension,
