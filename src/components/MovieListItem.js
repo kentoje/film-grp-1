@@ -25,8 +25,7 @@ const MovieListItem = ({ item }) => (
           style={styles.image}
           resizeMode={'contain'}
           source={{
-            uri:
-              'https://lumiere-a.akamaihd.net/v1/images/image_a89e70e8.jpeg?region=0%2C0%2C540%2C810',
+            uri: item.image,
           }}
         />
       </View>
