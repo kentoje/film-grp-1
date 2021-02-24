@@ -8,7 +8,7 @@ const MovieList = ({ items }) => {
       <FlatList
         data={items}
         renderItem={MovieListItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.imdbID}
       />
     </View>
   )
