@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, View, StyleSheet, Button } from 'react-native'
+import { TextInput, View, StyleSheet } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 const Search = ({ setter }) => {
@@ -10,12 +10,12 @@ const Search = ({ setter }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarWrapper}>
-      <Icon name="search" style={styles.icon} />
-      <TextInput
-        onChangeText={filterMovies}
-        style={styles.input}
-        placeholder="Titre du film"
-      />
+        <Icon name="search" />
+        <TextInput
+          onChangeText={filterMovies}
+          style={styles.input}
+          placeholder="Titre du film"
+        />
       </View>
     </View>
   )
