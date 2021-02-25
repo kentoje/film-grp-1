@@ -9,11 +9,10 @@ import {
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useHistory } from 'react-router-native'
+import getResponsiveImageDimension from '../lib/responsive-image'
 
 const RATIO = 0.25
-const multiply = (RATIO) => (measurement) => RATIO * measurement
-const quarterOfValue = multiply(RATIO)
-const responsiveDimension = quarterOfValue(Dimensions.get('window').width)
+const responsiveDimension = getResponsiveImageDimension(RATIO)(Dimensions.get('window').width)
 
 const MovieListItem = ({ item }) => {
   const history = useHistory()
