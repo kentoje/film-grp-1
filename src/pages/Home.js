@@ -4,6 +4,7 @@ import MoviesList from '../components/MoviesList'
 import Loader from '../components/Loader'
 import { getMoviesByPage } from '../service/fetchMovies'
 import moviesContext from '../context/MoviesContext'
+import { substractByKey } from '../lib/filter'
 
 const Home = () => {
   // No store, apiMovies is behaving like how a store would do.
@@ -31,8 +32,9 @@ const Home = () => {
            * Sometimes the API is sending dupplicates.
            * This is a side effect to remove duplicates.
            */
+          const substractById = substractByKey('id')
           const dupplicateMovies = [...allMovies]
-            .sort((a, b) => b.id - a.id)
+            .sort(substractById)
             .filter(({ id }, index, arr) => id === arr[index + 1]?.id)
 
           if (dupplicateMovies.length > 0) {
