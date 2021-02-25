@@ -16,7 +16,6 @@ const Home = () => {
 
   // Fetch next page when user reaches the end of the list.
   useEffect(() => {
-    console.log(nextPage, maxPage)
     if (!(nextPage > maxPage) && hasReachedBottom) {
       ;(async () => {
         try {

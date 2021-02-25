@@ -6,7 +6,6 @@ const API_KEY = '026890b0945cbc402813edbeb90f0223'
 
 const getMoviesByPage = async (page = 'null', query = 'null') => {
   try {
-    console.log(`${BASE_MOVIE_URL}?api_key=${API_KEY}&query=${query}&page=${page}`)
     const {
       data: { results, total_pages: totalPages, page: currentPage },
     } = await axios.get(
