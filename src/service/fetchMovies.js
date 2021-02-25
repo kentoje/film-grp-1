@@ -4,11 +4,13 @@ const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original'
 const BASE_MOVIE_URL = 'https://api.themoviedb.org/3/search/movie'
 const API_KEY = '026890b0945cbc402813edbeb90f0223'
 
-const getMoviesByPage = async (page) => {
+const getMoviesByPage = async (page = 'null', query = 'null') => {
   try {
     const {
-      data: { results, total_pages: totalPages },
-    } = await axios.get(`${BASE_MOVIE_URL}?api_key=${API_KEY}&query=null&page=${page}`)
+      data: { results, total_pages: totalPages, page: currentPage },
+    } = await axios.get(
+      `${BASE_MOVIE_URL}?api_key=${API_KEY}&query=${query}&page=${page}`,
+    )
 
     return {
       results: results.map((movie) => ({
@@ -18,7 +20,7 @@ const getMoviesByPage = async (page) => {
           : 'https://media.comicbook.com/files/img/default-movie.png',
         isPopular: movie.popularity * 10 > 7,
       })),
-      nextPage: page < totalPages ? page + 1 : page,
+      nextPage: currentPage + 1,
       totalPages,
     }
   } catch (err) {
