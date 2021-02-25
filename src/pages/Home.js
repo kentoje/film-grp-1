@@ -58,7 +58,7 @@ const Home = () => {
     setHasReachedBottom(false)
   }, [hasReachedBottom])
 
-  // Triggers every time filter changes.
+  // Triggered every time filter changes.
   useEffect(() => {
     ;(async () => {
       try {
