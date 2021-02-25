@@ -7,8 +7,7 @@ import moviesContext from '../context/MoviesContext'
 
 const Home = () => {
   // No store, apiMovies is behaving like how a store would do.
-  const [_, setApiMovies] = useContext(moviesContext)
-  const [movies, setMovies] = useState([])
+  const [apiMovies, setApiMovies] = useContext(moviesContext)
   const [filter, setFilter] = useState('')
   const [nextPage, setNextPage] = useState(1)
   const [maxPage, setMaxPage] = useState(0)
@@ -27,7 +26,7 @@ const Home = () => {
             nextPage,
             filter || 'null',
           )
-          const allMovies = [...movies, ...results]
+          const allMovies = [...apiMovies, ...results]
 
           /**
            * Sometimes the API is sending dupplicates.
@@ -48,7 +47,6 @@ const Home = () => {
           }
 
           setApiMovies(allMovies)
-          setMovies(allMovies)
           setNextPage(futurPage)
           setMaxPage(totalPages)
           setIsLoading(false)
@@ -73,7 +71,6 @@ const Home = () => {
         )
 
         setApiMovies(results)
-        setMovies(results)
         setNextPage(futurPage)
         setMaxPage(totalPages)
         setIsLoading(false)
@@ -86,7 +83,7 @@ const Home = () => {
   return (
     <>
       <Search setter={setFilter} />
-      <MoviesList items={movies} setter={setHasReachedBottom} />
+      <MoviesList items={apiMovies} setter={setHasReachedBottom} />
       {isLoading && <Loader />}
     </>
   )
