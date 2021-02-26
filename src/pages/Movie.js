@@ -1,8 +1,19 @@
 import React, { useContext } from 'react'
 import { ScrollView } from 'react-native'
-import { Text, Image, StyleSheet, View, Button, Dimensions, Platform } from 'react-native'
+import {
+  Text,
+  Image,
+  StyleSheet,
+  View,
+  Button,
+  Dimensions,
+  Platform,
+  TouchableHighlight,
+  Linking,
+} from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useParams } from 'react-router-native'
+import { Rating } from 'react-native-elements'
 import GoBack from '../components/GoBack'
 import moviesContext from '../context/MoviesContext'
 import getResponsiveImageDimension from '../lib/responsive-image'
@@ -35,6 +46,13 @@ const Movie = () => {
           <View style={styles.informations}>
             <Text style={styles.title}>{movie.title}</Text>
             <Text style={styles.author}>{movie.title}</Text>
+            <Rating
+              type="star"
+              readonly={true}
+              ratingCount={5}
+              startingValue={movie.vote_average / 2}
+              imageSize={16}
+            />
           </View>
           <View style={styles.playIconContainer}>
             <Icon color="#fff" size={48} name="arrow-right" />
@@ -46,13 +64,17 @@ const Movie = () => {
             <Text>{movie.overview}</Text>
           </View>
         </ScrollView>
-        <View style={styles.buttonWrapper}>
+        <TouchableHighlight
+          style={styles.buttonWrapper}
+          underlayColor="#f44802cc"
+          onPress={() => Linking.openURL('http://google.com')}
+        >
           {Platform.OS === 'ios' ? (
             <Button color="#fff" title="View website" />
           ) : (
             <Text style={{ color: '#fff' }}>View Website</Text>
           )}
-        </View>
+        </TouchableHighlight>
       </View>
     </>
   )
@@ -96,6 +118,7 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   informations: {
+    alignItems: 'flex-start',
     marginTop: 32,
     marginLeft: 8,
   },
