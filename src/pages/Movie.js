@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import {
   Text,
@@ -12,6 +12,7 @@ import {
   Linking,
   Modal,
   Pressable,
+  Animated,
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useParams } from 'react-router-native'
@@ -20,6 +21,7 @@ import GoBack from '../components/GoBack'
 import moviesContext from '../context/MoviesContext'
 import getResponsiveImageDimension from '../lib/responsive-image'
 import { getHomepageOfMovie } from '../service/fetchMovies'
+import { fadeIn } from '../service/fadeAnimation'
 
 const RATIO = 0.25
 const responsiveDimension = getResponsiveImageDimension(RATIO)(
@@ -33,8 +35,11 @@ const Movie = () => {
   const { id } = useParams()
   const movie = apiMovies.find((movie) => movie.id === Number(id))
 
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
   useEffect(() => {
     ;(async () => {
+      fadeIn(fadeAnim)
       try {
         setHomepage(await getHomepageOfMovie(movie.id))
       } catch (err) {
@@ -67,7 +72,10 @@ const Movie = () => {
           setShowModal(true)
         }}
       >
-        <Image style={styles.image} source={{ uri: movie.image }} />
+        <Animated.Image
+          style={[styles.image, { opacity: fadeAnim }]}
+          source={{ uri: movie.image }}
+        />
       </Pressable>
       <View style={styles.arrow}>
         <GoBack />
