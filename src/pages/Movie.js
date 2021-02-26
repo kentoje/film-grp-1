@@ -10,6 +10,8 @@ import {
   Platform,
   TouchableHighlight,
   Linking,
+  Modal,
+  Pressable,
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useParams } from 'react-router-native'
@@ -27,6 +29,7 @@ const responsiveDimension = getResponsiveImageDimension(RATIO)(
 const Movie = () => {
   const [apiMovies] = useContext(moviesContext)
   const [homepage, setHomepage] = useState('')
+  const [showModal, setShowModal] = useState(false)
   const { id } = useParams()
   const movie = apiMovies.find((movie) => movie.id === Number(id))
 
@@ -42,7 +45,30 @@ const Movie = () => {
 
   return (
     <>
-      <Image style={styles.image} source={{ uri: movie.image }} />
+      <Modal visible={showModal}>
+        <View style={styles.modal}>
+          <Pressable
+            style={styles.iconWrapper}
+            onPress={() => {
+              setShowModal(false)
+            }}
+          >
+            <Icon iconStyle={styles.icon} color="#fff" size={48} name="close" />
+          </Pressable>
+          <Image
+            style={styles.imageModal}
+            resizeMode={'contain'}
+            source={{ uri: movie.image }}
+          />
+        </View>
+      </Modal>
+      <Pressable
+        onPress={() => {
+          setShowModal(true)
+        }}
+      >
+        <Image style={styles.image} source={{ uri: movie.image }} />
+      </Pressable>
       <View style={styles.arrow}>
         <GoBack />
       </View>
@@ -101,6 +127,20 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: -24,
   },
+  modal: {
+    backgroundColor: '#000',
+  },
+  iconWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    zIndex: 1,
+  },
+  icon: {
+    borderColor: '#e0e0e0',
+    borderWidth: 1,
+    borderRadius: 1000,
+  },
   arrow: {
     position: 'absolute',
     top: 8,
@@ -108,6 +148,10 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 200,
+    width: '100%',
+  },
+  imageModal: {
+    height: '100%',
     width: '100%',
   },
   imageWrapper: {
