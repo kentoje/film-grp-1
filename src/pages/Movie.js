@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import {
   Text,
@@ -17,6 +17,7 @@ import { Rating } from 'react-native-elements'
 import GoBack from '../components/GoBack'
 import moviesContext from '../context/MoviesContext'
 import getResponsiveImageDimension from '../lib/responsive-image'
+import { getHomepageOfMovie } from '../service/fetchMovies'
 
 const RATIO = 0.25
 const responsiveDimension = getResponsiveImageDimension(RATIO)(
@@ -25,8 +26,19 @@ const responsiveDimension = getResponsiveImageDimension(RATIO)(
 
 const Movie = () => {
   const [apiMovies] = useContext(moviesContext)
+  const [homepage, setHomepage] = useState('')
   const { id } = useParams()
   const movie = apiMovies.find((movie) => movie.id === Number(id))
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        setHomepage(await getHomepageOfMovie(movie.id))
+      } catch (err) {
+        console.error(err)
+      }
+    })()
+  }, [])
 
   return (
     <>
@@ -67,7 +79,7 @@ const Movie = () => {
         <TouchableHighlight
           style={styles.buttonWrapper}
           underlayColor="#f44802cc"
-          onPress={() => Linking.openURL('http://google.com')}
+          onPress={() => Linking.openURL(homepage || 'http://google.com')}
         >
           {Platform.OS === 'ios' ? (
             <Button color="#fff" title="View website" />
@@ -127,6 +139,7 @@ const styles = StyleSheet.create({
   },
   synopsisContainer: {
     paddingLeft: 16,
+    paddingBottom: 24,
     marginTop: 32,
   },
   synopsis: {
@@ -139,6 +152,7 @@ const styles = StyleSheet.create({
     width: '90%',
     paddingVertical: 10,
     marginHorizontal: 16,
+    marginBottom: 8,
     backgroundColor: '#f44802',
     color: 'white',
     borderRadius: 12,

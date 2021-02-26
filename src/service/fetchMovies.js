@@ -28,4 +28,16 @@ const getMoviesByPage = async (page = 'null', query = 'null') => {
   }
 }
 
-export { getMoviesByPage }
+const getHomepageOfMovie = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
+    )
+
+    return data.homepage || ''
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { getMoviesByPage, getHomepageOfMovie }
