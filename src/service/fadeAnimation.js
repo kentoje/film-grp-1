@@ -8,7 +8,7 @@ const fadeIn = (animation) => {
   }).start()
 }
 
-const fadeOut = () => {
+const fadeOut = (animation) => {
   Animated.timing(animation, {
     toValue: 0,
     duration: 500,
